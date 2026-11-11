@@ -6,7 +6,7 @@
             name="netbird.exe"
             type="win32"
     />
-    <description>Netbird application</description>
+    <description>KilatMesh Agent - agen konektivitas sekolah PT Kilat Cloud Indonesia</description>
     <trustInfo xmlns="urn:schemas-microsoft-com:asm.v3">
         <security>
             <requestedPrivileges>

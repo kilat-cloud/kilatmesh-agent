@@ -326,7 +326,7 @@ func (f *DNSForwarder) handleDNSQuery(logger *log.Entry, w dns.ResponseWriter, q
 		// authoritative one. The OPT pseudo-record must not appear unless the
 		// query advertised EDNS0.
 		if reqHasEdns {
-			attachEDE(resp, dns.ExtendedErrorCodeNotSupported, "netbird forwarder: unsupported query type")
+			attachEDE(resp, dns.ExtendedErrorCodeNotSupported, "kilatmesh forwarder: unsupported query type")
 		}
 		f.writeResponse(logger, w, resp, qname, startTime)
 	}
@@ -583,9 +583,9 @@ func edeCodeFor(dnsErr *net.DNSError) uint16 {
 // detail stays in the forwarder's local log.
 func edeText(dnsErr *net.DNSError) string {
 	if dnsErr != nil && dnsErr.IsTimeout {
-		return "netbird forwarder: upstream timeout"
+		return "kilatmesh forwarder: upstream timeout"
 	}
-	return "netbird forwarder: upstream failure"
+	return "kilatmesh forwarder: upstream failure"
 }
 
 // attachEDE adds an Extended DNS Error (RFC 8914) option to the response,

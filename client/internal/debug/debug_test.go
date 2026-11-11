@@ -976,11 +976,11 @@ func newAnonymizerForTest() *anonymize.Anonymizer {
 
 func TestRemoveStaleBundles(t *testing.T) {
 	dir := t.TempDir()
-	stale := filepath.Join(dir, "netbird.debug.111.zip")
-	fresh := filepath.Join(dir, "netbird.debug.222.zip")
-	other := filepath.Join(dir, "netbird.debug.333.txt")
-	owned := filepath.Join(dir, "netbird.debug.444.zip")
-	abandoned := filepath.Join(dir, "netbird.debug.555.zip")
+	stale := filepath.Join(dir, "kilatmesh.debug.111.zip")
+	fresh := filepath.Join(dir, "kilatmesh.debug.222.zip")
+	other := filepath.Join(dir, "kilatmesh.debug.333.txt")
+	owned := filepath.Join(dir, "kilatmesh.debug.444.zip")
+	abandoned := filepath.Join(dir, "kilatmesh.debug.555.zip")
 	for _, p := range []string{stale, fresh, other, owned, abandoned} {
 		require.NoError(t, os.WriteFile(p, []byte("x"), 0o600))
 	}

@@ -156,7 +156,7 @@ func TestGetConfigDirUnderSudoIsReadOnly(t *testing.T) {
 
 	dir, err := getConfigDir()
 	require.NoError(t, err)
-	assert.Equal(t, filepath.Join(base, "netbird"), dir)
+	assert.Equal(t, filepath.Join(base, "kilatmesh"), dir)
 	assert.NoDirExists(t, dir)
 }
 
@@ -191,9 +191,9 @@ func TestSetProfileStateSkipsWriteUnderSudo(t *testing.T) {
 
 func TestRemoveProfileStateSkipsRemoveUnderSudo(t *testing.T) {
 	home := t.TempDir()
-	stateDir := filepath.Join(home, ".config", "netbird")
+	stateDir := filepath.Join(home, ".config", "kilatmesh")
 	if runtime.GOOS == "darwin" {
-		stateDir = filepath.Join(home, "Library", "Application Support", "netbird")
+		stateDir = filepath.Join(home, "Library", "Application Support", "kilatmesh")
 	}
 	require.NoError(t, os.MkdirAll(stateDir, 0o700))
 	stateFile := filepath.Join(stateDir, "default.state.json")

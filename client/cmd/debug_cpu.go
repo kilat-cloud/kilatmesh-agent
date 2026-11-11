@@ -17,13 +17,13 @@ var debugCPUCmd = &cobra.Command{
 The profile is included in the next debug bundle as cpu.prof.
 
 Profiling is not time limited: it keeps running, and keeps costing CPU, until
-"netbird debug cpu stop" is run.`,
+"kilatmesh debug cpu stop" is run.`,
 }
 
 var debugCPUStartCmd = &cobra.Command{
 	Use:     "start",
 	Short:   "Start CPU profiling in the daemon",
-	Example: "  netbird debug cpu start",
+	Example: "  kilatmesh debug cpu start",
 	Args:    cobra.NoArgs,
 	RunE:    debugCPUStart,
 }
@@ -33,7 +33,7 @@ var debugCPUStopCmd = &cobra.Command{
 	Short: "Stop CPU profiling in the daemon",
 	Long: `Stops CPU profiling. The captured profile stays in the daemon until the next
 debug bundle is created, which includes it as cpu.prof.`,
-	Example: "  netbird debug cpu stop && netbird debug bundle",
+	Example: "  kilatmesh debug cpu stop && kilatmesh debug bundle",
 	Args:    cobra.NoArgs,
 	RunE:    debugCPUStop,
 }
@@ -53,7 +53,7 @@ func debugCPUStart(cmd *cobra.Command, _ []string) error {
 		return fmt.Errorf("start CPU profiling: %v", status.Convert(err).Message())
 	}
 
-	cmd.Println("CPU profiling started and runs until stopped. Run `netbird debug cpu stop` and then `netbird debug bundle` to collect it.")
+	cmd.Println("CPU profiling started and runs until stopped. Run `kilatmesh debug cpu stop` and then `kilatmesh debug bundle` to collect it.")
 	return nil
 }
 
@@ -72,7 +72,7 @@ func debugCPUStop(cmd *cobra.Command, _ []string) error {
 		return fmt.Errorf("stop CPU profiling: %v", status.Convert(err).Message())
 	}
 
-	cmd.Println("CPU profiling stopped. Run `netbird debug bundle` to include cpu.prof.")
+	cmd.Println("CPU profiling stopped. Run `kilatmesh debug bundle` to include cpu.prof.")
 	return nil
 }
 

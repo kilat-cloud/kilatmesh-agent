@@ -212,12 +212,12 @@ contexts:
 - context:
     cluster: foo
     namespace: default
-    user: netbird
+    user: kilatmesh
   name: foo
 current-context: foo
 kind: Config
 users:
-- name: netbird
+- name: kilatmesh
   user:
     token: none
 `

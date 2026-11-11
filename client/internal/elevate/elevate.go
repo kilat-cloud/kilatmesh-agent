@@ -28,7 +28,7 @@ import (
 // macOS's AuthorizationExecuteWithPrivileges reports no exit status and does not
 // say which process it started, so there this line is the only evidence that the
 // change was applied. The other platforms have an exit code and ignore it.
-const AppliedMarker = "netbird-elevated: applied"
+const AppliedMarker = "kilatmesh-elevated: applied"
 
 var (
 	// ErrDeclined reports that the user dismissed the prompt or did not

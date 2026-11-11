@@ -8,7 +8,12 @@ const (
 	// GetURLPath is the path for the GetURL request
 	GetURLPath = "/upload-url"
 
-	DefaultBundleURL = "https://upload.debug.netbird.io" + GetURLPath
+	// DefaultBundleURL is the KilatMesh debug-bundle upload endpoint of
+	// PT Kilat Cloud Indonesia. Placeholder on the company domain: it must
+	// be provisioned (or overridden via --upload-bundle-url) before the
+	// bundle upload feature is used; school debug bundles must never be
+	// sent to third-party upload services by default.
+	DefaultBundleURL = "https://upload.debug.kilat-cloud.com" + GetURLPath
 )
 
 // GetURLResponse is the response for the GetURL request

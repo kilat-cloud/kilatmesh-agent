@@ -21,7 +21,7 @@ func (s *Server) createSftpCommand(targetUser *user.User, sess ssh.Session) (*ex
 
 	netbirdPath, err := os.Executable()
 	if err != nil {
-		return nil, 0, fmt.Errorf("get netbird executable path: %w", err)
+		return nil, 0, fmt.Errorf("get kilatmesh executable path: %w", err)
 	}
 
 	args := []string{

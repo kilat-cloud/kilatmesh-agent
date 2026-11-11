@@ -86,7 +86,7 @@ func (t *TunDevice) Create() (WGConfigurer, error) {
 
 	t.filteredDevice = newDeviceFilter(tunDevice)
 	log.Debug("Attaching to interface")
-	t.device = wgbackend.NewDevice(t.filteredDevice, t.iceBind, wgbackend.NewLogger(wgLogLevel(), "[netbird] "))
+	t.device = wgbackend.NewDevice(t.filteredDevice, t.iceBind, wgbackend.NewLogger(wgLogLevel(), "[kilatmesh] "))
 	// without this property mobile devices can discover remote endpoints if the configured one was wrong.
 	// this helps with support for the older NetBird clients that had a hardcoded direct mode
 	// t.device.DisableSomeRoamingForBrokenMobileSemantics()

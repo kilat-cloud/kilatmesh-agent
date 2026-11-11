@@ -29,14 +29,14 @@ const probeTimeout = 300 * time.Millisecond
 // privileged operations.
 //
 // Only the pipe address is resolved. A custom address is left alone, though passing
-// --daemon-addr npipe://netbird explicitly is indistinguishable from the default
+// --daemon-addr npipe://kilatmesh explicitly is indistinguishable from the default
 // here, so it is treated the same way.
 func ResolveDaemonAddr(addr string) string {
 	if addr != WindowsPipeAddr {
 		return addr
 	}
 
-	for _, path := range PipePaths("netbird") {
+	for _, path := range PipePaths("kilatmesh") {
 		if pipeAvailable(path) {
 			return addr
 		}

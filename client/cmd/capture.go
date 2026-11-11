@@ -29,14 +29,14 @@ Default output is human-readable text. Use --pcap or --output for pcap binary.
 Requires --enable-capture to be set at service install or reconfigure time.
 
 Examples:
-  netbird debug capture
-  netbird debug capture host 100.64.0.1 and port 443
-  netbird debug capture tcp
-  netbird debug capture icmp
-  netbird debug capture src host 10.0.0.1 and dst port 80
-  netbird debug capture -o capture.pcap
-  netbird debug capture --pcap | tshark -r -
-  netbird debug capture --pcap | tcpdump -r - -n`,
+  kilatmesh debug capture
+  kilatmesh debug capture host 100.64.0.1 and port 443
+  kilatmesh debug capture tcp
+  kilatmesh debug capture icmp
+  kilatmesh debug capture src host 10.0.0.1 and dst port 80
+  kilatmesh debug capture -o capture.pcap
+  kilatmesh debug capture --pcap | tshark -r -
+  kilatmesh debug capture --pcap | tcpdump -r - -n`,
 	Args: cobra.ArbitraryArgs,
 	RunE: runCapture,
 }

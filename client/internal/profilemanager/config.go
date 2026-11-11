@@ -32,13 +32,16 @@ const (
 	// managementLegacyPortString is the port that was used before by the Management gRPC server.
 	// It is used for backward compatibility now.
 	managementLegacyPortString = "33073"
-	// DefaultManagementURL points to the NetBird's cloud management endpoint
-	DefaultManagementURL = "https://api.netbird.io:443"
+	// DefaultManagementURL points to the KilatMesh management endpoint of
+	// PT Kilat Cloud Indonesia. Provisioning always passes --management-url
+	// (or NB_MANAGEMENT_URL) explicitly; this default only applies when an
+	// operator runs the agent without one.
+	DefaultManagementURL = "https://mesh.kilat-cloud.com:443"
 	// oldDefaultManagementURL points to the NetBird's old cloud management endpoint
 	oldDefaultManagementURL = "https://api.wiretrustee.com:443"
-	// DefaultAdminURL points to NetBird's cloud management console. It is only
+	// DefaultAdminURL points to the KilatMesh management console. It is only
 	// reported by the deprecated mobile admin URL getters.
-	DefaultAdminURL = "https://app.netbird.io:443"
+	DefaultAdminURL = "https://mesh.kilat-cloud.com:443"
 )
 
 // mgmProber is the subset of management client needed for URL migration probes.
@@ -253,7 +256,7 @@ func getConfigDir() (string, error) {
 		return "", err
 	}
 
-	configDir := filepath.Join(base, "netbird")
+	configDir := filepath.Join(base, "kilatmesh")
 	// Under sudo this is the invoking user's directory and strictly read-only:
 	// anything root creates in it would be root-owned and break the user's own
 	// runs. Reads of a missing directory fall through to defaults.

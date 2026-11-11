@@ -16,7 +16,7 @@ import (
 )
 
 const (
-	daemonName    = "netbird"
+	daemonName    = "kilatmesh"
 	updaterBinary = "updater"
 	uiBinary      = "/Applications/NetBird.app"
 
@@ -82,16 +82,16 @@ func (u *Installer) Setup(ctx context.Context, dryRun bool, installerFile string
 }
 
 func (u *Installer) startDaemon(daemonFolder string) error {
-	log.Infof("starting netbird service")
+	log.Infof("starting kilatmesh service")
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 
 	cmd := exec.CommandContext(ctx, filepath.Join(daemonFolder, daemonName), "service", "start")
 	if output, err := cmd.CombinedOutput(); err != nil {
-		log.Warnf("failed to start netbird service: %v, output: %s", err, string(output))
+		log.Warnf("failed to start kilatmesh service: %v, output: %s", err, string(output))
 		return err
 	}
-	log.Infof("netbird service started successfully")
+	log.Infof("kilatmesh service started successfully")
 	return nil
 }
 

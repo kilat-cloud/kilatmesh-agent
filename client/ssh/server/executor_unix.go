@@ -73,7 +73,7 @@ func (pd *PrivilegeDropper) log() *log.Entry {
 func (pd *PrivilegeDropper) CreateExecutorCommand(ctx context.Context, config ExecutorConfig) (*exec.Cmd, error) {
 	netbirdPath, err := os.Executable()
 	if err != nil {
-		return nil, fmt.Errorf("get netbird executable path: %w", err)
+		return nil, fmt.Errorf("get kilatmesh executable path: %w", err)
 	}
 
 	if err := pd.validatePrivileges(config.UID, config.GID); err != nil {

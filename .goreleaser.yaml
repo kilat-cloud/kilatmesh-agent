@@ -7,7 +7,7 @@ project_name: netbird
 builds:
   - id: netbird-wasm
     dir: client/wasm/cmd
-    binary: netbird
+    binary: kilatmesh
     env: [GOOS=js, GOARCH=wasm, CGO_ENABLED=0]
     goos:
       - js
@@ -19,7 +19,7 @@ builds:
 
   - id: netbird
     dir: client
-    binary: netbird
+    binary: kilatmesh
     env: [CGO_ENABLED=0]
     goos:
       - linux
@@ -46,7 +46,7 @@ builds:
   # Tarballs, the Alpine-based images and the other architectures keep the static build.
   - id: netbird-pkcs11
     dir: client
-    binary: netbird
+    binary: kilatmesh
     env: [CGO_ENABLED=0]
     goos:
       - linux
@@ -63,7 +63,7 @@ builds:
   # The 32-bit deb architectures, which have no PKCS#11 driver.
   - id: netbird-deb-32bit
     dir: client
-    binary: netbird
+    binary: kilatmesh
     env: [CGO_ENABLED=0]
     goos:
       - linux
@@ -81,7 +81,7 @@ builds:
   - &netbird_rpm_build
     id: netbird-rpm-amd64
     dir: client
-    binary: netbird
+    binary: kilatmesh
     env: [CGO_ENABLED=0]
     goos: [linux]
     goarch: [amd64]
@@ -110,7 +110,7 @@ builds:
 
   - id: netbird-static
     dir: client
-    binary: netbird
+    binary: kilatmesh
     env: [CGO_ENABLED=0]
     goos:
       - linux

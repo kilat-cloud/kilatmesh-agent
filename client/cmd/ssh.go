@@ -94,8 +94,8 @@ func init() {
 
 var sshCmd = &cobra.Command{
 	Use:   "ssh [flags] [user@]host [command]",
-	Short: "Connect to a NetBird peer via SSH",
-	Long: `Connect to a NetBird peer using SSH with support for port forwarding.
+	Short: "Connect to a KilatMesh peer via SSH",
+	Long: `Connect to a KilatMesh peer using SSH with support for port forwarding.
 
 Port Forwarding:
   -L [bind_address:]port:host:hostport   Local port forwarding
@@ -112,17 +112,17 @@ SSH Options:
   -o, --known-hosts string             Path to known_hosts file
 
 Examples:
-  netbird ssh peer-hostname
-  netbird ssh root@peer-hostname
-  netbird ssh --login root peer-hostname
-  netbird ssh peer-hostname ls -la
-  netbird ssh peer-hostname whoami
-  netbird ssh -t peer-hostname tmux                  # Force PTY for tmux/screen
-  netbird ssh -t peer-hostname sudo -i               # Force PTY for interactive sudo
-  netbird ssh -L 8080:localhost:80 peer-hostname     # Local port forwarding
-  netbird ssh -R 9090:localhost:3000 peer-hostname   # Remote port forwarding
-  netbird ssh -L "*:8080:localhost:80" peer-hostname # Bind to all interfaces
-  netbird ssh -L 8080:/tmp/socket peer-hostname      # Unix socket forwarding`,
+  kilatmesh ssh peer-hostname
+  kilatmesh ssh root@peer-hostname
+  kilatmesh ssh --login root peer-hostname
+  kilatmesh ssh peer-hostname ls -la
+  kilatmesh ssh peer-hostname whoami
+  kilatmesh ssh -t peer-hostname tmux                  # Force PTY for tmux/screen
+  kilatmesh ssh -t peer-hostname sudo -i               # Force PTY for interactive sudo
+  kilatmesh ssh -L 8080:localhost:80 peer-hostname     # Local port forwarding
+  kilatmesh ssh -R 9090:localhost:3000 peer-hostname   # Remote port forwarding
+  kilatmesh ssh -L "*:8080:localhost:80" peer-hostname # Bind to all interfaces
+  kilatmesh ssh -L 8080:/tmp/socket peer-hostname      # Unix socket forwarding`,
 	DisableFlagParsing: true,
 	Args:               validateSSHArgsWithoutFlagParsing,
 	RunE:               sshFn,
@@ -423,10 +423,10 @@ func createSSHFlagSet() (*flag.FlagSet, *sshFlags) {
 	fs.BoolVar(&flags.SkipCachedToken, "no-cache", false, "Skip cached JWT token and force fresh authentication")
 	fs.BoolVar(&flags.NoBrowser, "no-browser", defaultNoBrowser, noBrowserDesc)
 
-	fs.StringVar(&flags.ConfigPath, "c", defaultConfigPath, "Netbird config file location")
-	fs.StringVar(&flags.ConfigPath, "config", defaultConfigPath, "Netbird config file location")
-	fs.StringVar(&flags.LogLevel, "l", defaultLogLevel, "sets Netbird log level")
-	fs.StringVar(&flags.LogLevel, "log-level", defaultLogLevel, "sets Netbird log level")
+	fs.StringVar(&flags.ConfigPath, "c", defaultConfigPath, "KilatMesh config file location")
+	fs.StringVar(&flags.ConfigPath, "config", defaultConfigPath, "KilatMesh config file location")
+	fs.StringVar(&flags.LogLevel, "l", defaultLogLevel, "sets KilatMesh log level")
+	fs.StringVar(&flags.LogLevel, "log-level", defaultLogLevel, "sets KilatMesh log level")
 
 	return fs, flags
 }
@@ -536,7 +536,7 @@ func runSSH(ctx context.Context, addr string, cmd *cobra.Command) error {
 	if err != nil {
 		cmd.Printf("Failed to connect to %s@%s\n", username, target)
 		cmd.Printf("\nTroubleshooting steps:\n")
-		cmd.Printf("  1. Check peer connectivity: netbird status -d\n")
+		cmd.Printf("  1. Check peer connectivity: kilatmesh status -d\n")
 		cmd.Printf("  2. Verify SSH server is enabled on the peer\n")
 		cmd.Printf("  3. Ensure correct hostname/IP is used\n")
 		return fmt.Errorf("dial %s: %w", target, err)
@@ -850,8 +850,8 @@ func sshProxyFn(cmd *cobra.Command, args []string) error {
 
 var sshDetectCmd = &cobra.Command{
 	Use:    "detect <host> <port>",
-	Short:  "Detect if a host is running NetBird SSH",
-	Long:   "Internal command used by SSH Match exec to detect NetBird SSH servers. Exit codes: 0=JWT, 1=no-JWT, 2=regular SSH",
+	Short:  "Detect if a host is running KilatMesh SSH",
+	Long:   "Internal command used by SSH Match exec to detect KilatMesh SSH servers. Exit codes: 0=JWT, 1=no-JWT, 2=regular SSH",
 	Hidden: true,
 	Args:   cobra.ExactArgs(2),
 	RunE:   sshDetectFn,

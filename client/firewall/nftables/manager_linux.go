@@ -21,7 +21,7 @@ import (
 
 const (
 	// tableNameNetbird is the default name of the table that is used for filtering by the Netbird client
-	tableNameNetbird = "netbird"
+	tableNameNetbird = "kilatmesh"
 	// envTableName is the environment variable to override the table name
 	envTableName = "NB_NFTABLES_TABLE"
 
@@ -371,7 +371,7 @@ func (m *Manager) Close(stateManager *statemanager.Manager) error {
 	}
 
 	if err := m.cleanupNetbirdTables(); err != nil {
-		merr = multierror.Append(merr, fmt.Errorf("cleanup netbird tables: %v", err))
+		merr = multierror.Append(merr, fmt.Errorf("cleanup kilatmesh tables: %v", err))
 	}
 
 	if err := m.rConn.Flush(); err != nil {

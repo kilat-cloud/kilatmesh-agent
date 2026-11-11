@@ -248,8 +248,8 @@ dns_windows.txt (Windows only):
 
 const (
 	clientLogFile = "client.log"
-	errorLogFile  = "netbird.err"
-	stdoutLogFile = "netbird.out"
+	errorLogFile  = "kilatmesh.err"
+	stdoutLogFile = "kilatmesh.out"
 
 	// Rotated-log glob prefixes (base log name without extension) passed to
 	// addRotatedLogFiles. The daemon's own log and the GUI log live in the same
@@ -380,9 +380,9 @@ func NewBundleGenerator(deps GeneratorDependencies, cfg BundleConfig) *BundleGen
 
 // bundleFilePattern names the bundle zips Generate creates in tempDir; the
 // asterisk is filled in by os.CreateTemp.
-const bundleFilePattern = "netbird.debug.*.zip"
+const bundleFilePattern = "kilatmesh.debug.*.zip"
 
-const exportedBundlePrefix = "netbird.debug-file."
+const exportedBundlePrefix = "kilatmesh.debug-file."
 
 const exportedBundleMaxAge = 24 * time.Hour
 

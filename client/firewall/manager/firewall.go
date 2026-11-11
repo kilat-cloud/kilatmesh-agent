@@ -22,10 +22,10 @@ var ErrIPv6NotInitialized = errors.New("IPv6 firewall not initialized")
 var ErrNoSources = errors.New("rule has no sources")
 
 const (
-	ForwardingFormatPrefix = "netbird-fwd-"
-	ForwardingFormat       = "netbird-fwd-%s-%t"
-	PreroutingFormat       = "netbird-prerouting-%s-%t"
-	NatFormat              = "netbird-nat-%s-%t"
+	ForwardingFormatPrefix = "kilatmesh-fwd-"
+	ForwardingFormat       = "kilatmesh-fwd-%s-%t"
+	PreroutingFormat       = "kilatmesh-prerouting-%s-%t"
+	NatFormat              = "kilatmesh-nat-%s-%t"
 )
 
 // RuleID identifies a firewall rule. It is a typed string so the

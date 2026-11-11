@@ -29,7 +29,7 @@ var (
 func handlePanicLog() error {
 	// TODO: move this to a central location
 	logDir := path.Join(os.Getenv("PROGRAMDATA"), "Netbird")
-	logPath := path.Join(logDir, "netbird.err")
+	logPath := path.Join(logDir, "kilatmesh.err")
 
 	if err := os.MkdirAll(logDir, 0750); err != nil {
 		return fmt.Errorf("create panic log directory: %w", err)

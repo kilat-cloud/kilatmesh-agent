@@ -1,0 +1,35 @@
+KilatMesh Agent
+===============
+
+Fork notice
+-----------
+This product, KilatMesh Agent, is a fork of NetBird
+(https://github.com/netbirdio/netbird), pinned at upstream release
+v0.82.1 (commit a48050004588a5651a4191bfa4e363da5ee273a3).
+See UPSTREAM.md for the pinned source and the per-component license
+summary.
+
+The NetBird client code in this repository is licensed under the
+BSD-3-Clause License. The full license text is in the LICENSE file
+and in LICENSES/BSD-3-Clause.txt, and the original copyright notices
+are retained unchanged.
+
+Modifications (c) 2026 PT Kilat Cloud Indonesia. The modifications
+consist of product rebranding (product name, CLI strings, service
+names, default paths, firewall object names, documentation). No
+wire protocol, key or identity format, or management compatibility
+behavior was changed.
+
+KilatMesh and PT Kilat Cloud Indonesia are not affiliated with,
+sponsored by, or endorsed by NetBird or NetBird GmbH. "NetBird" is
+a trademark of its respective owner; it appears in this repository
+only in internal identifiers, license/attribution texts, and this
+notice, as required for license compliance and upstream sync.
+
+Server components note
+----------------------
+The directories management/, signal/, relay/ and combined/ in the
+upstream repository are licensed under the GNU Affero General
+Public License v3.0 (AGPLv3). They are NOT part of the KilatMesh
+Agent distribution and are not modified by this fork; deployments
+run the upstream server components unmodified.

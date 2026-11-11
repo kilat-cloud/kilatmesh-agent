@@ -24,19 +24,19 @@ const (
 	tableRaw      = "raw"
 	tableSecurity = "security"
 
-	chainNameRoutingFw     = "netbird-rt-fwd"
-	chainNameRoutingNat    = "netbird-rt-postrouting"
-	chainNameRoutingRdr    = "netbird-rt-redirect"
-	chainNameNATOutput     = "netbird-nat-output"
+	chainNameRoutingFw     = "kilatmesh-rt-fwd"
+	chainNameRoutingNat    = "kilatmesh-rt-postrouting"
+	chainNameRoutingRdr    = "kilatmesh-rt-redirect"
+	chainNameNATOutput     = "kilatmesh-nat-output"
 	chainNameForward       = "FORWARD"
-	chainNameMangleForward = "netbird-mangle-forward"
+	chainNameMangleForward = "kilatmesh-mangle-forward"
 
 	// Peer ACL chain names.
-	chainNameInputRules        = "netbird-acl-input-rules"
-	chainNameInputFilter       = "netbird-acl-input-filter"
-	chainNameForwardFilter     = "netbird-acl-forward-filter"
-	chainNameManglePrerouting  = "netbird-mangle-prerouting"
-	chainNameManglePostrouting = "netbird-mangle-postrouting"
+	chainNameInputRules        = "kilatmesh-acl-input-rules"
+	chainNameInputFilter       = "kilatmesh-acl-input-filter"
+	chainNameForwardFilter     = "kilatmesh-acl-forward-filter"
+	chainNameManglePrerouting  = "kilatmesh-mangle-prerouting"
+	chainNameManglePostrouting = "kilatmesh-mangle-postrouting"
 
 	flushError = "flush: %w"
 

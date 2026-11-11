@@ -117,10 +117,10 @@ func TestRequirePrivilegeForUploadURL(t *testing.T) {
 	}{
 		{name: "no upload", url: "", unprivOK: true},
 		{name: "default service", url: types.DefaultBundleURL, unprivOK: true},
-		{name: "default service, other path", url: "https://upload.debug.netbird.io/other", unprivOK: true},
+		{name: "default service, other path", url: "https://upload.debug.kilat-cloud.com/other", unprivOK: true},
 		{name: "loopback exfiltration endpoint", url: "https://127.0.0.1:8080/upload-url", rootAlso: true},
 		{name: "custom upload service", url: "https://attacker.example/upload-url", rootAlso: true},
-		{name: "plaintext default host", url: "http://upload.debug.netbird.io/upload-url", invalid: true},
+		{name: "plaintext default host", url: "http://upload.debug.kilat-cloud.com/upload-url", invalid: true},
 		{name: "plaintext custom host", url: "http://attacker.example/upload-url", invalid: true},
 		{name: "unsupported scheme", url: "file:///etc/shadow", invalid: true},
 		// insecure relaxes transport security; privileged only, whatever the host.

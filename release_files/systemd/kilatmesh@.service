@@ -1,21 +1,21 @@
 [Unit]
-Description=Netbird Client (%i)
-Documentation=https://netbird.io/docs
+Description=KilatMesh Agent - agen konektivitas sekolah PT Kilat Cloud Indonesia (%i)
+Documentation=https://kilat-cloud.com
 After=network-online.target syslog.target NetworkManager.service
 Wants=network-online.target
 
 [Service]
 Type=simple
-EnvironmentFile=-/etc/default/netbird
-ExecStart=/usr/bin/netbird service run --log-file /var/log/netbird/client-%i.log --daemon-addr unix:///var/run/netbird/%i.sock $FLAGS
+EnvironmentFile=-/etc/default/kilatmesh
+ExecStart=/usr/local/bin/kilatmesh service run --log-file /var/log/kilatmesh/client-%i.log --daemon-addr unix:///var/run/kilatmesh/%i.sock $FLAGS
 Restart=on-failure
 RestartSec=5
 TimeoutStopSec=10
-CacheDirectory=netbird
-ConfigurationDirectory=netbird
-LogsDirectory=netbird
-RuntimeDirectory=netbird
-StateDirectory=netbird
+CacheDirectory=kilatmesh
+ConfigurationDirectory=kilatmesh
+LogsDirectory=kilatmesh
+RuntimeDirectory=kilatmesh
+StateDirectory=kilatmesh
 
 # sandboxing
 LockPersonality=yes

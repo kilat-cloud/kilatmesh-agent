@@ -46,7 +46,7 @@ const (
 	// NetbirdVPNTableID is the ID of the custom routing table used by Netbird.
 	NetbirdVPNTableID = 0x1BD0
 	// NetbirdVPNTableName is the name of the custom routing table used by Netbird.
-	NetbirdVPNTableName = "netbird"
+	NetbirdVPNTableName = "kilatmesh"
 
 	// rtTablesPath is the path to the file containing the routing table names.
 	rtTablesPath = "/etc/iproute2/rt_tables"
@@ -498,7 +498,7 @@ func routeTableToString(tableID int) string {
 	case syscall.RT_TABLE_LOCAL:
 		return "local"
 	case NetbirdVPNTableID:
-		return "netbird"
+		return "kilatmesh"
 	default:
 		return fmt.Sprintf("%d", tableID)
 	}
@@ -614,7 +614,7 @@ func ruleTableToString(table int) string {
 	case syscall.RT_TABLE_DEFAULT:
 		return "default"
 	case NetbirdVPNTableID:
-		return "netbird"
+		return "kilatmesh"
 	default:
 		return fmt.Sprintf("%d", table)
 	}

@@ -9,7 +9,7 @@ import (
 var (
 	versionCmd = &cobra.Command{
 		Use:   "version",
-		Short: "Print the NetBird's client application version",
+		Short: "Print the KilatMesh client application version",
 		Run: func(cmd *cobra.Command, args []string) {
 			cmd.SetOut(cmd.OutOrStdout())
 			out := version.NetbirdVersion()
@@ -18,7 +18,7 @@ var (
 					out += "-" + commit
 				}
 			}
-			cmd.Println(out)
+			cmd.Println("KilatMesh Agent " + out)
 		},
 	}
 )

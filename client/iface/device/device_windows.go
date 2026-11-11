@@ -69,7 +69,7 @@ func (t *TunDevice) Create() (WGConfigurer, error) {
 	t.device = wgbackend.NewDevice(
 		t.filteredDevice,
 		t.iceBind,
-		wgbackend.NewLogger(wgLogLevel(), "[netbird] "),
+		wgbackend.NewLogger(wgLogLevel(), "[kilatmesh] "),
 	)
 
 	luid := winipcfg.LUID(t.nativeTunDevice.LUID())
