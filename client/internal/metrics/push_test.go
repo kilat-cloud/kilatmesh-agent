@@ -344,3 +344,19 @@ func TestIsVersionInRange(t *testing.T) {
 		})
 	}
 }
+
+// TestPush_ForceSendingRequiresExplicitServerURL proves the KilatMesh
+// default: force sending has no built-in fallback metrics server, so it
+// must fail instead of silently targeting an upstream endpoint.
+func TestPush_ForceSendingRequiresExplicitServerURL(t *testing.T) {
+	metrics := &mockMetrics{exportData: "test_metric 1\n"}
+	configProvider := &mockConfigProvider{config: nil}
+
+	push, err := NewPush(metrics, configProvider, PushConfig{
+		ForceSending: true,
+		Interval:     1 * time.Minute,
+	}, "1.0.0")
+	require.Error(t, err)
+	assert.Nil(t, push)
+	assert.Contains(t, err.Error(), EnvMetricsServerURL)
+}

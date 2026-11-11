@@ -31,7 +31,10 @@ const (
 	// Format: duration string like "1h", "30m", "4h"
 	EnvMetricsInterval = "NB_METRICS_INTERVAL"
 
-	defaultMetricsConfigURL = "https://ingest.netbird.io/config"
+	// defaultMetricsConfigURL is empty in KilatMesh Agent builds: there is
+	// no built-in metrics configuration endpoint. An operator who opts in
+	// to metrics push must set EnvMetricsConfigURL explicitly.
+	defaultMetricsConfigURL = ""
 )
 
 // IsMetricsPushEnabled returns true if metrics push is enabled via NB_METRICS_PUSH_ENABLED env var.

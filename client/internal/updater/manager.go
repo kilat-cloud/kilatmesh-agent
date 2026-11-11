@@ -466,6 +466,10 @@ func (m *Manager) setModeLocked(mode updateMode) {
 }
 
 func (m *Manager) install(ctx context.Context, pendingVersion *v.Version) error {
+	if !version.UpstreamUpdateAllowed() {
+		return errors.New(version.UpstreamUpdateDisabledMessage)
+	}
+
 	m.statusRecorder.PublishEvent(
 		cProto.SystemEvent_CRITICAL,
 		cProto.SystemEvent_SYSTEM,

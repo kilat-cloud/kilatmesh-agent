@@ -258,3 +258,75 @@ tetapi keputusannya harus eksplisit, bukan bawaan.
    endpoint upload debug, dan kebijakan update/telemetri.
 4. Sinkronisasi upstream berkala: `git fetch upstream`, rebase per
    rilis; diff rebrand dijaga dangkal agar murah.
+
+## 8. Addendum (2026-11-11) — Update & telemetri upstream DINONAKTIFKAN secara default
+
+Keputusan yang ditunda di §6 kini diambil: agen KilatMesh yang
+terpasang di sekolah **tidak boleh** mengganti dirinya dengan binary
+upstream dan **tidak boleh** mengirim telemetri ke infrastruktur
+NetBird. Semua jalur di bawah kini default-deny, digerbang satu
+opt-in eksplisit operator: env var
+**`KILATMESH_ALLOW_UPSTREAM_UPDATE=1`** (konstanta + parser terpusat
+di `version/updategate.go`, pesan penolakan seragam:
+"KilatMesh Agent updates are managed by PT Kilat Cloud Indonesia;
+upstream self-update is disabled in this build").
+
+### Jalur update yang digerbang
+- **Version check berkala** (`version/update.go`): fetcher yang
+  tadinya mem-poll `https://pkgs.netbird.io/releases/latest/version`
+  tiap 30 menit kini tidak start sama sekali tanpa opt-in (terbukti
+  oleh test baru dengan server penghitung: 0 request). URL
+  dipertahankan hanya untuk jalur opt-in.
+- **Instalasi oleh daemon** (`client/internal/updater/manager.go`):
+  `install()` menolak sebelum menyentuh installer, jadi directive
+  versi dari management (mode managed/force, termasuk
+  `AlwaysUpdate`) maupun tombol install UI tidak dapat mengeksekusi
+  update. `installer.RunInstallation`
+  (`client/internal/updater/installer/installer_common.go`)
+  digerbang yang sama sebagai lapis terakhir, sebelum unduhan
+  artefak GitHub releases maupun verifikasi kunci
+  `publickeys.netbird.io` terjadi.
+- **Binary updater CLI** (`client/cmd/update_supported.go`,
+  Windows/macOS): proses bernama `update(.exe)` kini mencetak pesan
+  KilatMesh di atas dan keluar tanpa melakukan apa pun. Di Linux
+  jalur ini memang tidak pernah didukung.
+
+### Jalur telemetri yang digerbang (`client/internal/metrics`)
+- **Management tidak lagi bisa menyalakan push metrik dari jauh.**
+  `UpdatePushFromMgm` kini hanya boleh *menghentikan* push; push
+  hanya start lewat opt-in operator yang sudah ada
+  (`NB_METRICS_PUSH_ENABLED=true` saat connect).
+- **Endpoint bawaan dihapus dari binary**: URL config
+  `https://ingest.netbird.io/config` menjadi kosong dan fallback
+  server `https://ingest.netbird.io` untuk force-sending dihapus.
+  Force-sending tanpa `NB_METRICS_SERVER_URL` eksplisit kini gagal
+  dengan error jelas; fetch config tanpa URL berhenti lokal tanpa
+  trafik jaringan. Verifikasi binary: string `ingest.netbird.io`
+  **0 kemunculan** di kedua artefak `dist/`.
+- Yang tidak berubah (disengaja): koleksi metrik lokal untuk debug
+  bundle tetap aktif; URL management/signal dari konfigurasi
+  (`mesh.kilat-cloud.com`) adalah infrastruktur kita, bukan target
+  penonaktifan; konstanta protokol wire utuh.
+
+### Cara operator memperbarui agen secara sah
+Tidak ada update otomatis. Pembaruan layanan dilakukan manual oleh
+PT Kilat Cloud Indonesia: ganti binary `kilatmesh` di mesin sekolah
+dengan artefak rilis KilatMesh yang baru (lalu restart service),
+atau, di masa depan, lewat server update milik Kilat Cloud sendiri.
+Env var opt-in di atas hanya untuk keperluan darurat/lab di bawah
+arahan PT Kilat Cloud Indonesia, bukan untuk deployment sekolah.
+
+### Verifikasi addendum
+- `go vet` bersih: paket yang diubah di Linux, plus cross-vet/build
+  GOOS=windows & GOOS=darwin untuk paket updater/installer/cmd
+  (vet `./client/cmd` lintas-OS menarik test-helper `management/`
+  yang memang host-only; kegagalannya pra-ada dan tak terkait).
+- Unit test lulus: `version` (termasuk 2 test gerbang baru),
+  `client/internal/metrics/...` (termasuk test force-sending tanpa
+  URL & test default config kosong), `client/internal/updater/...`,
+  `client/cmd` (2 test service-params yang terdokumentasi sensitif
+  GOTMPDIR lulus dengan GOTMPDIR di tmpfs).
+- Binary dibangun ulang dengan resep §4: linux 42.983.584 byte
+  (sha256 `323b416f…`), windows 39.237.632 byte (sha256
+  `14c54fa1…`). `kilatmesh version` → `KilatMesh Agent 0.82.1`;
+  sapuan `--help` 20 permukaan tetap **0 "netbird"**.

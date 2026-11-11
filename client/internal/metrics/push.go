@@ -21,12 +21,8 @@ const (
 	defaultPushInterval = 5 * time.Minute
 )
 
-// defaultMetricsServerURL is used as fallback when NB_METRICS_FORCE_SENDING is true
-var defaultMetricsServerURL *url.URL
-
-func init() {
-	defaultMetricsServerURL, _ = url.Parse("https://ingest.netbird.io")
-}
+// KilatMesh Agent builds have no built-in default metrics server URL.
+// Force sending requires an explicit server address via NB_METRICS_SERVER_URL.
 
 // PushConfig holds configuration for metrics push
 type PushConfig struct {
@@ -82,7 +78,7 @@ func NewPush(metrics metricsImplementation, configManager remoteConfigProvider, 
 
 		cfgAddress = config.ServerAddress
 		if cfgAddress == nil {
-			cfgAddress = defaultMetricsServerURL
+			return nil, fmt.Errorf("metrics push with force sending requires an explicit server URL: set %s", EnvMetricsServerURL)
 		}
 	} else {
 		cfgAddress = config.ServerAddress

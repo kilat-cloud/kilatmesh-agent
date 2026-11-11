@@ -18,6 +18,7 @@ import (
 
 	"github.com/netbirdio/netbird/client/internal/updater/downloader"
 	"github.com/netbirdio/netbird/client/internal/updater/reposign"
+	"github.com/netbirdio/netbird/version"
 )
 
 type Installer struct {
@@ -41,6 +42,10 @@ func NewWithDir(tempDir string) *Installer {
 // RunInstallation starts the updater process to run the installation
 // This will run by the original service process
 func (u *Installer) RunInstallation(ctx context.Context, targetVersion string) (err error) {
+	if !version.UpstreamUpdateAllowed() {
+		return fmt.Errorf("%s", version.UpstreamUpdateDisabledMessage)
+	}
+
 	resultHandler := NewResultHandler(u.tempDir)
 	if err := resultHandler.ClearStaleResult(); err != nil {
 		log.Warnf("clear stale installer result: %v", err)

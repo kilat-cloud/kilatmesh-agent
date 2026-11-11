@@ -108,6 +108,10 @@ func (u *Update) LatestVersion() *goversion.Version {
 }
 
 func (u *Update) StartFetcher() {
+	if !UpstreamUpdateAllowed() {
+		log.Infof("upstream version check disabled: %s", UpstreamUpdateDisabledMessage)
+		return
+	}
 	if u.fetchTicker != nil {
 		return
 	}

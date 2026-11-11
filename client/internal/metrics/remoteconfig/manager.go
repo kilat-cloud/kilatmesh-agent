@@ -88,6 +88,10 @@ func (m *Manager) isConfigFresh() bool {
 }
 
 func (m *Manager) fetch(ctx context.Context) (*Config, error) {
+	if m.configURL == "" {
+		return nil, fmt.Errorf("no metrics config URL configured")
+	}
+
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, m.configURL, nil)
 	if err != nil {
 		return nil, fmt.Errorf("create request: %w", err)

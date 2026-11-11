@@ -4,6 +4,7 @@ package cmd
 
 import (
 	"context"
+	"fmt"
 	"os"
 	"path/filepath"
 	"strings"
@@ -13,6 +14,7 @@ import (
 
 	"github.com/netbirdio/netbird/client/internal/updater/installer"
 	"github.com/netbirdio/netbird/util"
+	"github.com/netbirdio/netbird/version"
 )
 
 var (
@@ -49,6 +51,11 @@ func isUpdateBinary() bool {
 }
 
 func updateFunc(cmd *cobra.Command, args []string) error {
+	if !version.UpstreamUpdateAllowed() {
+		fmt.Println(version.UpstreamUpdateDisabledMessage)
+		return nil
+	}
+
 	if err := setupLogToFile(tempDirFlag); err != nil {
 		return err
 	}
